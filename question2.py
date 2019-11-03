@@ -7,8 +7,9 @@ import math
 class GradientDescent():
     def __init__(self, function, start, stepSize):
         self.function = function
-        self.start = start
+        self.positions = np.array([start[0], start[1]], dtype=float).reshape(1,2)
         self.stepSize = stepSize
+        self.globalMinima = np.array([1,1], dtype=float).reshape(1,2)
 
         # Define the derivative symbolically
         x = sy.Symbol('x')
@@ -31,15 +32,19 @@ class GradientDescent():
 
     def gradientDescent(self):
 
-        x0, y0 = self.start[0], self.start[1]
-        dist = math.sqrt(math.pow((x0-1),2) + math.pow(y0 - 1,2))
+        x0, y0 = self.positions[0,0], self.positions[0,1]
+        # dist = math.sqrt(math.pow((x0-1),2) + math.pow(y0 - 1,2))
+        dist = np.linalg.norm(self.positions[0,] - self.globalMinima)
+        self.distances = np.array(dist, dtype=float).reshape(1,1)
 
         while dist > 10e-3:
             gradient = self.Dfunction(x=x0, y=y0)
             x0, y0 = self.step((x0, y0), gradient)
-            dist = math.sqrt(math.pow((x0-1),2) + math.pow(y0 - 1,2))
-            print(f'dist: {dist}; x0: {x0}, y0: {y0}')
-        return (x0, y0)
+            self.positions = np.append(self.positions, np.array([x0, y0], dtype=float).reshape(1,2), axis=0)
+            dist = np.linalg.norm(self.positions[-1,] - self.globalMinima[0,])
+            self.distances = np.append(self.distances, np.array(dist, dtype=float).reshape(1,1), axis=0)
+            print(f'dist: {dist:5.4}; x0: {x0:5.4}, y0: {y0:5.4}')
+        return (self.positions, self.distances)
 
     def step(self, position, gradient):
         x0, y0 = position[0], position[1]
@@ -52,5 +57,9 @@ class GradientDescent():
 
 
 optimizer = GradientDescent('100*(y-x^2)^2+(1-x)^2', (-2.5, 2), 0.001)
-print(optimizer.gradientDescent())
+positions, distances = optimizer.gradientDescent()
+
+np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/question1/positions.npy', positions) # save
+np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/question1/distances.npy', distances)
+# new_num_arr = np.load('data.npy') # load
 
