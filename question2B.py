@@ -20,8 +20,6 @@ class GradientDescent():
         gradient = np.array([dx, dy], dtype = 'float64').reshape(2, 1)
         return gradient
 
-
-
     def descent(self):
         # Get starting position
         x0 = np.array((self.positions[0,0], self.positions[0,1]), dtype = 'float64').reshape(2,1)
@@ -49,5 +47,4 @@ if __name__ == '__main__':
 
     np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/positions2.npy', positions)  # save
     np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/distances2.npy', distances)
-    # new_num_arr = np.load('data.npy') # load
 

@@ -1,13 +1,11 @@
-from question3 import NewtonDescent
+from question2B import GradientDescent
 import math
 import numpy as np
 
-class MonteCarlo(NewtonDescent):
+class MonteCarlo(GradientDescent):
 
     def __init__(self, start, stepSize):
         super().__init__(start, stepSize)
-
-    # The actual descent implemented in super class
 
     def step(self, x0):
         beta = np.random.uniform(0, 2 * math.pi)
