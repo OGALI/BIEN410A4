@@ -33,7 +33,6 @@ class GradientDescent():
     def gradientDescent(self):
 
         x0, y0 = self.positions[0,0], self.positions[0,1]
-        # dist = math.sqrt(math.pow((x0-1),2) + math.pow(y0 - 1,2))
         dist = np.linalg.norm(self.positions[0,] - self.globalMinima)
         self.distances = np.array(dist, dtype=float).reshape(1,1)
 
@@ -54,12 +53,12 @@ class GradientDescent():
         y1 = y0 - self.stepSize * gradY
         return (x1, y1)
 
+if __name__ == '__main__':
 
+    optimizer = GradientDescent('100*(y-x^2)^2+(1-x)^2', (-2.5, 2), 0.001)
+    positions, distances = optimizer.gradientDescent()
 
-optimizer = GradientDescent('100*(y-x^2)^2+(1-x)^2', (-2.5, 2), 0.001)
-positions, distances = optimizer.gradientDescent()
-
-np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/question1/positions.npy', positions) # save
-np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/question1/distances.npy', distances)
-# new_num_arr = np.load('data.npy') # load
+    np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/question1/positions.npy', positions) # save
+    np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/question1/distances.npy', distances)
+    # new_num_arr = np.load('data.npy') # load
 
