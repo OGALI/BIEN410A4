@@ -19,12 +19,12 @@ class MonteCarlo(NewtonDescent):
 
     def probability(self, x1, x0):
         p = np.random.uniform(0,1)
-        # add minus
-        h = -(self.f(x1[0], x1[1]) - self.f(x0[0], x0[0]))/(10e-5)
-        f = np.exp(h)
+        f = np.exp(-(self.f(x1[0], x1[1]) - self.f(x0[0], x0[0]))/10e-5)
         if p < f: return True
         else: return False
 
 if __name__ == '__main__':
     monte = MonteCarlo((-2.5, 2), 0.001)
-    monte.descent()
+    positions, distances = monte.descent()
+    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/positions3.npy', positions)  # save
+    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/distances3.npy', distances)
