@@ -1,9 +1,12 @@
 import math
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class NewtonDescent():
     f = lambda self, x, y: 100 * math.pow((y - math.pow(x, 2)), 2) + math.pow((1-x), 2)
+    # f = lambda self, x, y: 100 * (y - x**2)**2 + (1-x)**2
+
     dx = lambda self, x, y: 400 * math.pow(x, 3) - 400 * x * y + 2 * x - 2
     dy = lambda self, x, y: 200 * y - 200 * math.pow(x, 2)
     dxx = lambda self, x, y: -400 * y + 400 * math.pow(x, 2) + 800 * math.pow(x, 2) + 2
@@ -30,20 +33,22 @@ class NewtonDescent():
         inverse_hessian = np.linalg.inv(hessian)
         return inverse_hessian
 
-    def newtonDescent(self):
+    def descent(self):
         # Get starting position
         x0 = np.array((self.positions[0,0], self.positions[0,1]), dtype = 'float64').reshape(2,1)
 
         dist = np.linalg.norm(x0 - self.globalMinima[0,])
 
         # Create array of distances
-        # self.distances = np.array(dist).reshape(1,1)
+        self.distances = np.array(dist).reshape(1,1)
 
         while dist > 10e-3:
             x0 = self.step(x0)
             dist = np.linalg.norm(x0 - self.globalMinima[0,])
-            # self.distances = np.append(self.distances, np.array(dist, dtype=float).reshape(1, 1), axis=0)
-            print(f'dist: {dist}; x0: {x0[0]} y0: {x0[1]}')
+            self.positions = np.append(self.positions, np.array(x0, dtype=float).reshape(1,2), axis=0)
+            self.distances = np.append(self.distances, np.array(dist, dtype=float).reshape(1,1), axis=0)
+            print(f'dist: {dist:4.4}; x0: {x0[0]} y0: {x0[1]}')
+        return self.positions, self.distances
 
     # TODO store the distances data and positions
     def step(self, x0):
@@ -56,4 +61,8 @@ class NewtonDescent():
 
 if __name__ == '__main__':
     newton = NewtonDescent((-2.5, 2), 0.1)
-    newton.newtonDescent()
+    positions, distances = newton.descent()
+
+    plt.plot(positions[:,0], positions[:,1])
+    plt.plot(distances)
+    plt.show()
