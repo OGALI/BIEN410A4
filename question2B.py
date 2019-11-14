@@ -26,13 +26,14 @@ class GradientDescent():
         dist = np.linalg.norm(x0 - self.globalMinima[0,])
         # Create array of distances
         self.distances = np.array(dist).reshape(1,1)
-
+        iter = 1
         while dist > 10e-3:
             x0 = self.step(x0)
             dist = np.linalg.norm(x0 - self.globalMinima[0,])
-            self.positions = np.append(self.positions, np.array(x0, dtype=float).reshape(1,2), axis=0)
-            self.distances = np.append(self.distances, np.array(dist, dtype=float).reshape(1,1), axis=0)
-            print(f'dist: {dist:4.4}; x0: {x0[0]} y0: {x0[1]}')
+            self.positions = np.append(self.positions, np.array(x0, dtype='float64').reshape(1,2), axis=0)
+            self.distances = np.append(self.distances, np.array(dist, dtype='float64').reshape(1,1), axis=0)
+            print(f'# {iter} dist: {dist:4.4}; x0: {x0[0]} y0: {x0[1]}')
+            iter = iter +1
         return self.positions, self.distances
 
     def step(self, x0):
@@ -45,6 +46,6 @@ if __name__ == '__main__':
     optimizer = GradientDescent((-2.5, 2), 0.001)
     positions, distances = optimizer.descent()
 
-    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/positions2.npy', positions)  # save
-    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/distances2.npy', distances)
+    np.save('question1/positions2.npy', positions)  # save
+    np.save('question1/distances2.npy', distances)
 
