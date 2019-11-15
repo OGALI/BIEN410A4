@@ -25,11 +25,11 @@ class NewtonDescent(GradientDescent):
         return x1
 
 
-
 if __name__ == '__main__':
     newton = NewtonDescent((-2.5, 2), 0.1)
     positions, distances = newton.descent()
 
-    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/output/positions3.npy', positions) # save
-    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/output/distances3.npy', distances)
+
+    np.save('question1/positions3.npy', positions) # save
+    np.save('question1/distances3.npy', distances)
 
