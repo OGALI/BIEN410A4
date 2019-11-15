@@ -58,7 +58,7 @@ if __name__ == '__main__':
     optimizer = GradientDescent('100*(y-x^2)^2+(1-x)^2', (-2.5, 2), 0.001)
     positions, distances = optimizer.gradientDescent()
 
-    np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/question1/positions2.npy', positions) # save
-    np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/question1/distances2.npy', distances)
+    np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/output/positions2.npy', positions) # save
+    np.save('/Users/alinajmaldin/PycharmProjects/BIEN410A4/output/distances2.npy', distances)
     # new_num_arr = np.load('data.npy') # load
 

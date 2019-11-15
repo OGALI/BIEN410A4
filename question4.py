@@ -23,5 +23,5 @@ class MonteCarlo(GradientDescent):
 if __name__ == '__main__':
     monte = MonteCarlo((-2.5, 2), 0.001)
     positions, distances = monte.descent()
-    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/positions4.npy', positions)  # save
-    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/distances4.npy', distances)
+    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/output/positions4.npy', positions)  # save
+    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/output/distances4.npy', distances)

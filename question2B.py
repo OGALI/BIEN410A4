@@ -45,6 +45,6 @@ if __name__ == '__main__':
     optimizer = GradientDescent((-2.5, 2), 0.001)
     positions, distances = optimizer.descent()
 
-    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/positions2.npy', positions)  # save
-    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/question1/distances2.npy', distances)
+    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/output/positions2.npy', positions)  # save
+    np.save('/Users/alinajmaldin/Desktop/BIEN410A4/output/distances2.npy', distances)
 
